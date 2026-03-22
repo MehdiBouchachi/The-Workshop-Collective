@@ -1,0 +1,51 @@
+// eslint-disable-next-line no-unused-vars
+const members = [
+  {
+    id: 1,
+    name: "Anis Rahman",
+    role: "Lead Designer",
+    bio: "I craft interfaces that feel inevitable — where every pixel has a reason. Obsessed with the space between form and function.",
+    isOnline: true,
+    skills: ["Figma", "Design Systems", "Motion"],
+  },
+  {
+    id: 2,
+    name: "Mehdi Bouchachi",
+    role: "Frontend Engineer",
+    bio: "I turn design tokens into living UIs. If it runs in a browser, I want to understand every layer of how it works.",
+    isOnline: true,
+    skills: ["React", "CSS", "TypeScript"],
+  },
+  {
+    id: 3,
+    name: "Nada Ashraf",
+    role: "Product Strategist",
+    bio: "Connecting user needs to business outcomes. I speak designer, developer, and stakeholder fluently.",
+    isOnline: false,
+    skills: ["Research", "Roadmapping", "Analytics"],
+  },
+  {
+    id: 4,
+    name: "Mohamed Rebbouh",
+    role: "Backend Engineer",
+    bio: "Databases, APIs, and distributed systems are my playground. I like things fast, reliable, and elegantly structured.",
+    isOnline: true,
+    skills: ["Node.js", "PostgreSQL", "Docker"],
+  },
+  {
+    id: 5,
+    name: "Yousra El Idrissi",
+    role: "Creative Director",
+    bio: "Brand identity, art direction, visual storytelling. I make sure every touchpoint feels cohesive and intentional.",
+    isOnline: false,
+    skills: ["Branding", "Art Direction", "Illustration"],
+  },
+  {
+    id: 6,
+    name: "Takkiden Khelifat",
+    role: "DevOps Engineer",
+    bio: "Pipelines, containers, and zero-downtime deploys. I keep the engine running so the rest of the team can ship freely.",
+    isOnline: true,
+    skills: ["CI/CD", "Kubernetes", "AWS"],
+  },
+];

@@ -1,0 +1,591 @@
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --bg: #1a1a1f;
+  --bg-raised: #22222a;
+  --bg-card: #202028;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.15);
+
+  --ink-primary: #eceaf6;
+  --ink-secondary: #8b8899;
+  --ink-tertiary: #4e4c58;
+
+  --accent: #c8b8ff;
+  --accent-dim: rgba(200, 184, 255, 0.09);
+
+  --online-color: #52e0a0;
+  --online-bg: rgba(82, 224, 160, 0.09);
+  --online-border: rgba(82, 224, 160, 0.22);
+
+  --offline-color: #5a5868;
+  --offline-bg: rgba(90, 88, 104, 0.14);
+  --offline-border: rgba(90, 88, 104, 0.28);
+
+  --font-serif: "Georgia", "Times New Roman", serif;
+  --font-mono: "Courier New", Courier, monospace;
+  --font-ui: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 40px;
+  --sp-2xl: 64px;
+
+  --r-lg: 22px;
+  --r-full: 999px;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.45), 0 8px 28px rgba(0, 0, 0, 0.38);
+  --shadow-hover:
+    0 2px 8px rgba(0, 0, 0, 0.55), 0 20px 48px rgba(0, 0, 0, 0.48);
+  --glow:
+    0 0 0 1px rgba(200, 184, 255, 0.14), 0 12px 40px rgba(200, 184, 255, 0.07);
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink-primary);
+  font-family: var(--font-ui);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Page ───────────────────────────────────────────────────────────────────── */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--sp-2xl) var(--sp-lg) 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xl);
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  padding-bottom: var(--sp-xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(200, 184, 255, 0.7);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-weight: normal;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--ink-secondary);
+  max-width: 40ch;
+  line-height: 1.6;
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* ─── Controls ───────────────────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+}
+
+.btn-group {
+  display: flex;
+  gap: var(--sp-sm);
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 9px 20px;
+  border-radius: var(--r-full);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--ink-secondary);
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.btn:hover {
+  color: var(--ink-primary);
+  border-color: var(--border-hover);
+  background: var(--bg-card);
+}
+
+.btn.active {
+  background: var(--accent-dim);
+  border-color: rgba(200, 184, 255, 0.28);
+  color: var(--accent);
+}
+
+.count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-tertiary);
+  text-transform: uppercase;
+}
+
+/* ─── Team Grid ──────────────────────────────────────────────────────────────── */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--sp-md);
+}
+
+/* ─── Card ───────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-lg);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover), var(--glow);
+  border-color: var(--border-hover);
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-md);
+}
+
+/* ─── Avatar ─────────────────────────────────────────────────────────────────── */
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.initials {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* ─── Card Info ──────────────────────────────────────────────────────────────── */
+.card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: normal;
+  color: var(--ink-primary);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.role {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--ink-secondary);
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+/* ─── Badge ──────────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--r-full);
+  font-size: 0.66rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.badge.online {
+  color: var(--online-color);
+  background: var(--online-bg);
+  border: 1px solid var(--online-border);
+}
+
+.badge.offline {
+  color: var(--offline-color);
+  background: var(--offline-bg);
+  border: 1px solid var(--offline-border);
+}
+
+.pip {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge.online .pip {
+  box-shadow: 0 0 6px var(--online-color);
+}
+
+/* ─── Tags ───────────────────────────────────────────────────────────────────── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs);
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  font-size: 0.68rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--ink-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.card:hover .tag {
+  color: var(--ink-primary);
+  border-color: var(--border-hover);
+}
+
+/* ─── Bio ────────────────────────────────────────────────────────────────────── */
+.bio {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: var(--ink-secondary);
+  font-family: var(--font-serif);
+  font-style: italic;
+  padding-top: var(--sp-xs);
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+
+/* ── Tablet landscape & small desktop: 2 columns (768px – 1023px) ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .page {
+    padding: 48px var(--sp-xl) 80px;
+    gap: var(--sp-lg);
+  }
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-md);
+  }
+  .title {
+    font-size: 3.6rem;
+  }
+}
+
+/* ── Desktop: 3 columns (1024px+) ── */
+@media (min-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Tablet portrait: 1 or 2 columns (600px – 767px) ── */
+@media (max-width: 767px) and (min-width: 600px) {
+  .page {
+    padding: 40px var(--sp-lg) 72px;
+    gap: var(--sp-lg);
+  }
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-sm);
+  }
+  .title {
+    font-size: 2.8rem;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-sm);
+  }
+}
+
+/* ── Large phone (400px – 599px) — iPhone 6/7/8/X/11/12 range ── */
+@media (max-width: 599px) and (min-width: 400px) {
+  .page {
+    padding: var(--sp-lg) var(--sp-md) 64px;
+    gap: var(--sp-md);
+  }
+  .header {
+    gap: var(--sp-sm);
+    padding-bottom: var(--sp-lg);
+  }
+  .title {
+    font-size: 2.2rem;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    font-size: 0.88rem;
+    max-width: 100%;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-sm);
+  }
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-sm);
+  }
+  .btn-group {
+    width: 100%;
+  }
+  .btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px 14px;
+  }
+  .card {
+    padding: var(--sp-md);
+    border-radius: 16px;
+  }
+}
+
+/* ── Small phone (360px – 399px) — Android average ── */
+@media (max-width: 399px) and (min-width: 360px) {
+  .page {
+    padding: var(--sp-md) 12px 56px;
+    gap: var(--sp-md);
+  }
+  .header {
+    gap: 6px;
+    padding-bottom: var(--sp-md);
+  }
+  .eyebrow {
+    font-size: 0.6rem;
+  }
+  .title {
+    font-size: 1.9rem;
+    letter-spacing: -0.01em;
+    line-height: 1.06;
+  }
+  .subtitle {
+    font-size: 0.82rem;
+    max-width: 100%;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .btn {
+    padding: 10px 8px;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+  .count {
+    font-size: 0.62rem;
+  }
+  .card {
+    padding: 14px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+  .card-top {
+    gap: 10px;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .initials {
+    font-size: 0.75rem;
+  }
+  .name {
+    font-size: 0.95rem;
+  }
+  .role {
+    font-size: 0.62rem;
+  }
+  .badge {
+    padding: 3px 8px;
+    font-size: 0.58rem;
+  }
+  .tag {
+    padding: 3px 9px;
+    font-size: 0.62rem;
+  }
+  .bio {
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+}
+
+/* ── iPhone 4 & very small screens (max 359px, min 280px) ── */
+@media (max-width: 359px) {
+  .page {
+    padding: 12px 10px 48px;
+    gap: 14px;
+  }
+  .header {
+    gap: 6px;
+    padding-bottom: 14px;
+  }
+  .eyebrow {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+  }
+  .dot {
+    width: 5px;
+    height: 5px;
+  }
+  .title {
+    font-size: 1.65rem;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+  .subtitle {
+    font-size: 0.78rem;
+    max-width: 100%;
+    line-height: 1.5;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .btn {
+    padding: 9px 6px;
+    font-size: 0.68rem;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
+  .count {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+  .card {
+    padding: 12px;
+    border-radius: 12px;
+    gap: 10px;
+  }
+  .card-top {
+    gap: 8px;
+    align-items: center;
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+  .initials {
+    font-size: 0.68rem;
+  }
+  .name {
+    font-size: 0.88rem;
+    white-space: normal;
+  }
+  .role {
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+  }
+  .badge {
+    padding: 2px 7px;
+    font-size: 0.55rem;
+    gap: 3px;
+  }
+  .pip {
+    width: 4px;
+    height: 4px;
+  }
+  .tags {
+    gap: 4px;
+  }
+  .tag {
+    padding: 2px 8px;
+    font-size: 0.58rem;
+    letter-spacing: 0.03em;
+  }
+  .bio {
+    font-size: 0.76rem;
+    line-height: 1.6;
+  }
+}
