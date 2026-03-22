@@ -1,16 +1,67 @@
-# React + Vite
+# The Workshop Collective
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React app built for an introductory workshop on **React Fundamentals**.  
+It showcases a modern team directory UI while teaching the core ideas behind React:
 
-Currently, two official plugins are available:
+- Components
+- JSX
+- Props
+- `useState`
+- Rendering lists with `map()`
+- Conditional rendering
+- Basic event handling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This project is intentionally simple in logic, but polished in presentation.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Preview
 
-## Expanding the ESLint configuration
+**The Workshop Collective** displays a team of members as elegant cards.  
+Users can:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- toggle bios on and off
+- show all members or only online members
+
+The goal is to help beginners understand how React builds UI from data.
+
+---
+
+## Learning Objectives
+
+This app is designed to teach the following React concepts:
+
+### 1. Components
+
+The UI is broken into reusable pieces such as:
+
+- `Header`
+- `Controls`
+- `Avatar`
+- `StatusBadge`
+- `SkillTags`
+- `MemberCard`
+- `TeamGrid`
+
+### 2. JSX
+
+Each component returns JSX to describe what should appear on the screen.
+
+### 3. Props
+
+Data flows from parent components to child components using props.
+
+Examples:
+
+- `MemberCard` receives a `member`
+- `StatusBadge` receives `isOnline`
+- `SkillTags` receives `skills`
+
+### 4. State
+
+The app uses React state to control UI changes.
+
+```js
+const [showBios, setShowBios] = useState(false);
+const [onlineOnly, setOnlineOnly] = useState(false);
+```
