@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
 const members = [
   {
     id: 1,
@@ -51,6 +53,8 @@ const members = [
   },
 ];
 
+// ─── Components ───────────────────────────────────────────────────────────────
+
 function Header() {
   return (
     <header className="header">
@@ -71,40 +75,31 @@ function Header() {
 }
 
 function Controls({
-  showBio,
-  setShowBio,
-  setOnlineOnly,
+  showBios,
+  onToggleBios,
   onlineOnly,
-  totalMembers,
-  onlineMembers,
+  onToggleOnline,
+  count,
+  total,
 }) {
-  function handleToggleBio() {
-    // true , false , showBio = true , !showBio = false
-    setShowBio(!showBio);
-  }
-
-  function handleToggleOnline() {
-    setOnlineOnly(!onlineOnly);
-  }
-
   return (
     <div className="controls">
       <div className="btn-group">
         <button
-          className={`btn ${showBio && "active"}`}
-          onClick={handleToggleBio}
+          className={`btn ${showBios ? "active" : ""}`}
+          onClick={onToggleBios}
         >
-          {showBio ? "Hide Bios" : "Show Bios"}
+          {showBios ? "Hide Bios" : "Show Bios"}
         </button>
         <button
-          className={`btn ${onlineOnly && "active"}`}
-          onClick={handleToggleOnline}
+          className={`btn ${onlineOnly ? "active" : ""}`}
+          onClick={onToggleOnline}
         >
-          {onlineOnly ? "Show All" : "Online Only"}
+          {onlineOnly ? "All Members" : "Online Only"}
         </button>
       </div>
       <p className="count">
-        {onlineMembers} of {totalMembers} members
+        {count} of {total} members
       </p>
     </div>
   );
@@ -117,6 +112,7 @@ function Avatar({ name }) {
     .join("");
 
   const hue = (name.charCodeAt(0) * 37) % 360;
+
   return (
     <div
       className="avatar"
@@ -124,8 +120,17 @@ function Avatar({ name }) {
         background: `linear-gradient(135deg, hsl(${hue}, 70%, 52%), hsl(${(hue + 40) % 360}, 80%, 62%))`,
       }}
     >
-      <span>{initials}</span>
+      <span className="initials">{initials}</span>
     </div>
+  );
+}
+
+function StatusBadge({ isOnline }) {
+  return (
+    <span className={`badge ${isOnline ? "online" : "offline"}`}>
+      <span className="pip" />
+      {isOnline ? "Online" : "Offline"}
+    </span>
   );
 }
 
@@ -140,64 +145,60 @@ function SkillTags({ skills }) {
     </div>
   );
 }
-function TeamMember({ member, showBio }) {
-  const { name, role, isOnline, skills: memberSkills, bio } = member;
 
+function MemberCard({ member, showBio }) {
+  const { name, role, isOnline, skills, bio } = member;
   return (
     <article className="card">
       <div className="card-top">
         <Avatar name={name} />
-
         <div className="card-info">
           <h2 className="name">{name}</h2>
           <p className="role">{role}</p>
         </div>
-        <span className={`badge online`}>
-          <span className="pip" />
-          {isOnline ? "Online" : "Offline"}
-        </span>
+        <StatusBadge isOnline={isOnline} />
       </div>
-      <SkillTags skills={memberSkills} />
+
+      <SkillTags skills={skills} />
 
       {showBio && <p className="bio">{bio}</p>}
     </article>
   );
 }
 
-function TeamGrid({ showBio, filteredMembers }) {
+function TeamGrid({ members, showBios }) {
   return (
     <section className="team-grid">
-      {filteredMembers.map((member) => (
-        <TeamMember key={member.id} member={member} showBio={showBio} />
+      {members.map((member) => (
+        <MemberCard key={member.id} member={member} showBio={showBios} />
       ))}
     </section>
   );
 }
 
-function App() {
-  const [showBio, setShowBio] = useState(true);
-  const [onlineOnly, setOnlineOnly] = useState(true);
+// ─── App ──────────────────────────────────────────────────────────────────────
 
-  const filteredMembers = onlineOnly
-    ? members.filter((member) => member.isOnline)
+export default function App() {
+  const [showBios, setShowBios] = useState(false);
+  const [onlineOnly, setOnlineOnly] = useState(false);
+
+  const visibleMembers = onlineOnly
+    ? members.filter((m) => m.isOnline)
     : members;
 
-  const totalMembers = members.length;
-  const onlineMembers = filteredMembers.length;
   return (
     <div className="page">
       <Header />
       <Controls
-        showBio={showBio}
-        setShowBio={setShowBio}
+        showBios={showBios}
+        onToggleBios={() => setShowBios(!showBios)}
         onlineOnly={onlineOnly}
-        setOnlineOnly={setOnlineOnly}
-        totalMembers={totalMembers}
-        onlineMembers={onlineMembers}
+        onToggleOnline={() => setOnlineOnly(!onlineOnly)}
+        count={visibleMembers.length}
+        total={members.length}
       />
-      <TeamGrid showBio={showBio} filteredMembers={filteredMembers} />
+      <TeamGrid members={visibleMembers} showBios={showBios} />
     </div>
   );
 }
 
-export default App;
